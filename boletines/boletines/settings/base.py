@@ -11,33 +11,56 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from unipath import Path
+
+#configuracion del secret.json
+from django.core.exceptions import ImproperlyConfigured
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).ancestor(3)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#b*cs4)*1nuq2i$vc_0a2c60p(t)d(x@n!#^(%x4$($y#c&1v^'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#configuracion del secret.json
+with open("secret.json") as f:
+    secret = json.loads(f.read())
 
-ALLOWED_HOSTS = []
+def get_secret(secret_name, secrets=secret):
+    try:
+        return secrets[secret_name]
+    except:
+        msg = "La variable %s no existe" % secret_name
+        raise ImproperlyConfigured
+
+SECRET_KEY = get_secret('SECRET_KEY')
 
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+)
+
+LOCAL_APPS = (
+    
+)
+
+THIRD_APPS = (
+    
+)
+
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_APPS
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +77,7 @@ ROOT_URLCONF = 'boletines.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR.child('templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,15 +93,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'boletines.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -113,11 +127,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
