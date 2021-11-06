@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 
 from django.views.generic import (
     View,
+    ListView,
     CreateView
 )
 
@@ -21,10 +22,11 @@ from .forms import (
 from .models import User
 
 
-class UserRegisterView(FormView):
+class UserRegisterView(LoginRequiredMixin, FormView):
     template_name = "users/register.html"
     form_class=UserRegisterForm
     success_url='/'
+    login_url = reverse_lazy('users_app:user-login')
 
     def form_valid(self, form):
 
@@ -88,3 +90,10 @@ class UpdatePasswordView(LoginRequiredMixin, FormView):
     
         logout(self.request)
         return super(UpdatePasswordView, self).form_valid(form)
+
+
+class ListaUser(LoginRequiredMixin, ListView):
+    model = User
+    template_name = "users/usuarios.html"
+    paginate_by=8
+    ordering = 'username'

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+<h1>Usuarios</h1>
+
+
+{% block title %}
+Usuarios
+    
+{% endblock title %}
+    
+
+
+{% block content %}
+<ul>
+
+    {% for e in object_list %}
+        <li> {{ e }}</li>
+        
+    {% endfor %}
+        
+</ul>
+{% endblock content %}
+    
+

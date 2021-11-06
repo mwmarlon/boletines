@@ -25,3 +25,4 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR.child('static')]

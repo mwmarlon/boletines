@@ -1,18 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Panel de usuarios</h1>
-    <h3>Bienvenido: {{user}}</h3>
-    <p>Fecha: {{fecha}}</p>
-    <ul>
-        <li><a href="{% url 'users_app:user-logout' %}">Cerrar sesion</a></li>
-        <li><a href="{% url 'users_app:user-update' %}">Actualizar datos</a></li>
-    </ul>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+
+    
+    <div class="container">
+        <div class="row justify-content-center text-center pt-5 mt-4 m-5">
+            <div class="col-md-6 col-sm-8 col-xl-4 col-lg-5 bg-light">
+                <div class="form-group pt-5">
+                    <div class="form-floating">
+                        <h1>Panel de usuario</h1>
+                        <br><br>
+                        <div class="col-12">
+                            
+                            <a class="btn btn-primary" href="#" role="button">Estudiantes</a>
+                            <a class="btn btn-primary" href="#" role="button">Boletines</a>
+                            <br><br>
+                            <a class="btn btn-primary" href="#" role="button">Fichas</a>
+                            <a class="btn btn-primary" href="#" role="button">Proceso integral</a>
+                            <br><br>
+                            <a class="btn btn-primary" href="{% url 'users_app:usuarios' %}" role="button">Administrador</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+{% endblock content %} 
+
+
