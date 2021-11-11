@@ -13,14 +13,34 @@ Usuarios
 
 
 {% block content %}
-<ul>
 
-    {% for e in object_list %}
-        <li> {{ e }}</li>
-        
-    {% endfor %}
-        
-</ul>
+    <div class="container">
+        <div>
+            <h1>Lista empleados</h1>
+            <div>
+                <div>
+                    aqui va caja de texto
+                </div>
+                <div>
+                    aqui va boton
+                </div>
+            </div>
+            <div>
+                aqui va la tabla
+            </div>
+        </div>
+        <h1>Lista de todos los empleados</h1>
+
+
+        <ul>
+
+            {% for e in object_list %}
+                <li> {{ e }}</li>
+                
+            {% endfor %}
+                
+        </ul>
+    </div>  
 {% endblock content %}
     
 

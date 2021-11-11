@@ -1,5 +1,5 @@
 from django.db import models
-#importe de AbstractBaseUser
+
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 #
 from .managers import UserManager
@@ -45,6 +45,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "Usuario"
         verbose_name_plural = "Usuarios"
+        ordering = ['nombres']
+
+
+
+
 
 
 
